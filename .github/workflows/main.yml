@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Docker login
-        uses: docker/login-actions@v3
+        uses: login/docker-actions@v3
         with: ${{ secrets.DOCKER_USERNAME }}
               ${{ secrets.DOCKER_PASSWORD }}
           
