@@ -50,7 +50,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Login to Ec2
-        run: appleboy/action@v3.12
+        uses: appleboy/action@v3.12
         with:
           host: ${{ secrets.EC2_HOST}}
           username: ec2-user
