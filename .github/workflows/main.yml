@@ -11,9 +11,20 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v4
-
+        
+      - name: Docker login
+        uses: docker/login-actions@v3
+        with: ${{ secrets.DOCKER_USERNAME }}
+              ${{ secrets.DOCKER_PASSWORD }}
+          
       - name: Build docker 
         run: docker build -t myapp .
+
+      - name: tag docker image
+        run: docker tag myapp ${{secrets.DOCKER_USERNAME}}/myapp:v2
+        
+      - name: push docker image
+        run: docker push ${{secrets.DOCKER_USERNAME}}/myapp:v2
 
   test:
     needs: build
