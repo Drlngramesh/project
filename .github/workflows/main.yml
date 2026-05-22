@@ -1,0 +1,34 @@
+name: CI Pipeline
+
+on: 
+  push:
+    branches: 
+      - main
+env: 
+  $Image: yapp
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Build docker 
+        run: docker run -t $Image .
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run tests
+        run: echo "running tests"
+
+  deply:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploying app on Ec2 server
+        run: echo "deployment successfull"
